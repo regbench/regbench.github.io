@@ -35,7 +35,7 @@ export default function Home() {
 
   // State to track which column we are sorting by, and in what direction
   const [sortConfig, setSortConfig] = useState<{ key: string, direction: 'asc' | 'desc' }>({
-    key: 'accuracy', // Default sort
+    key: 'dnvAccuracy', // Default sort
     direction: 'desc'
   });
 
