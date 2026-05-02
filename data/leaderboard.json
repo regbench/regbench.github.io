@@ -1,0 +1,20 @@
+[
+  {
+    "modelName": "[PLACEHOLDER: GPT-4o]",
+    "accuracy": 82.5,
+    "reasoningScore": 0.78,
+    "methodology": "[PLACEHOLDER: Zero-shot Chain of Thought]"
+  },
+  {
+    "modelName": "[PLACEHOLDER: Llama-3-70B]",
+    "accuracy": 64.1,
+    "reasoningScore": 0.52,
+    "methodology": "[PLACEHOLDER: 5-shot Standard Prompting]"
+  },
+  {
+    "modelName": "[PLACEHOLDER: Claude 3.5 Sonnet]",
+    "accuracy": 79.8,
+    "reasoningScore": 0.74,
+    "methodology": "[PLACEHOLDER: Few-shot Prompting]"
+  }
+]
