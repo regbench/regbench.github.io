@@ -1,20 +1,38 @@
 [
   {
-    "modelName": "[PLACEHOLDER: GPT-4o]",
-    "accuracy": 82.5,
-    "reasoningScore": 0.78,
-    "methodology": "[PLACEHOLDER: Zero-shot Chain of Thought]"
+    "modelName": "BM25 + Sonnet 4.6",
+    "dnvAccuracy": 44.3,
+    "baselAccuracy": 56.9,
+    "methodology": "BM25 top-10 retrieval + Sonnet reader"
   },
   {
-    "modelName": "[PLACEHOLDER: Llama-3-70B]",
-    "accuracy": 64.1,
-    "reasoningScore": 0.52,
-    "methodology": "[PLACEHOLDER: 5-shot Standard Prompting]"
+    "modelName": "Sonnet 4.6 (Anthropic)",
+    "dnvAccuracy": 43.9,
+    "baselAccuracy": 52.0,
+    "methodology": "Practitioner-scope (full_context)"
   },
   {
-    "modelName": "[PLACEHOLDER: Claude 3.5 Sonnet]",
-    "accuracy": 79.8,
-    "reasoningScore": 0.74,
-    "methodology": "[PLACEHOLDER: Few-shot Prompting]"
+    "modelName": "GPT-5.4 (OpenAI)",
+    "dnvAccuracy": 43.1,
+    "baselAccuracy": 45.2,
+    "methodology": "Practitioner-scope (full_context)"
+  },
+  {
+    "modelName": "Qwen3.6-plus",
+    "dnvAccuracy": 35.9,
+    "baselAccuracy": 35.6,
+    "methodology": "Practitioner-scope (full_context)"
+  },
+  {
+    "modelName": "MiniMax",
+    "dnvAccuracy": 16.6,
+    "baselAccuracy": 17.1,
+    "methodology": "Practitioner-scope (full_context)"
+  },
+  {
+    "modelName": "Closed-book Baseline",
+    "dnvAccuracy": 0.0,
+    "baselAccuracy": 0.0,
+    "methodology": "Scenario only, no source text"
   }
 ]

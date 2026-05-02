@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <main className="max-w-5xl mx-auto p-8 font-sans text-gray-900">
       <header className="mb-12 border-b pb-6 text-center">
-        <h1 className="text-4xl font-bold mb-4">[PLACEHOLDER: RegBench: A Benchmark for Complex Regulatory Reasoning]</h1>
+        <h1 className="text-4xl font-bold mb-4">RegBench: Source-Grounded Benchmarks for Regulatory Cross-Reference Reasoning</h1>
         <p className="text-lg text-gray-600 mb-4">
           Anonymous submission for NeurIPS 2026.
         </p>
@@ -86,16 +86,19 @@ export default function Home() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">About the Dataset</h2>
         <p className="leading-relaxed text-gray-700 mb-4">
-          [PLACEHOLDER: Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here. Paper's abstract here.]
+          Compliance work in regulated domains requires tracking cross-references across sections and applying the resulting chain to numeric or categorical decisions. Existing benchmarks test retrieval within a single document or synthetic multi-hop QA over Wikipedia; they do not isolate traversal over real regulatory cross-reference graphs.
+        </p>
+        <p className="leading-relaxed text-gray-700 mb-4">
+          We introduce <strong>RegBench</strong>, a benchmark with 827 questions spanning 4,766 atomic-fact propositions across DNV Ship Rules and Basel III §217, simulating real-life cases, with frontier LLM models proven failing on these tasks. Alongside the benchmark, we present a framework that converts a regulatory corpus' cross-reference graph into source-grounded QA items with minimal annotation effort and high accuracy.
         </p>
       </section>
 
       <section className="mb-12 bg-gray-50 p-6 rounded-lg border border-gray-200">
         <h2 className="text-xl font-semibold mb-4">Dataset Example</h2>
         <div className="text-sm text-gray-800 space-y-3 font-mono">
-          <p><strong>Domain:</strong> [PLACEHOLDER: e.g., basel_12cfr217]</p>
-          <p><strong>Question:</strong> [PLACEHOLDER: Insert a sample question here, e.g., "A Board-regulated institution acting as an advanced approaches bank..."]</p>
-          <p><strong>Expected Derivation:</strong> [PLACEHOLDER: Insert the step-by-step reasoning chain required to arrive at the answer.]</p>
+          <p><strong>Domain:</strong> basel_12cfr217 (Tier 2)</p>
+          <p><strong>Question:</strong> A Board-regulated institution acting as an advanced approaches bank has entered into an nth-to-default credit derivative as a protection provider, where the reference pool consists of five wholesale obligors. The institution has determined that the notional amount of the derivative is $50 million...</p>
+          <p><strong>Expected Derivation:</strong> Step 1 — Identify the nth-to-default protection provider treatment: Under § 217.142(m)(1)... Step 2 — Rank the underlying exposures by risk-based capital requirement... Step 3 — Cross-reference to § 217.135(a)(2)(ii)...</p>
         </div>
       </section>
 
@@ -106,41 +109,27 @@ export default function Home() {
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-3.5 pl-4 pr-3 text-sm font-semibold text-gray-900">Rank</th>
-                
-                {/* Clickable Headers with Custom Sort Icons */}
-                <th 
-                  className="px-3 py-3.5 text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 select-none group" 
-                  onClick={() => requestSort('modelName')}
-                >
+                <th className="px-3 py-3.5 text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 select-none group" onClick={() => requestSort('modelName')}>
                   Model <SortIcon sortKey="modelName" currentSortConfig={sortConfig} />
                 </th>
-                
-                <th 
-                  className="px-3 py-3.5 text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 select-none group" 
-                  onClick={() => requestSort('accuracy')}
-                >
-                  Accuracy <SortIcon sortKey="accuracy" currentSortConfig={sortConfig} />
+                <th className="px-3 py-3.5 text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 select-none group" onClick={() => requestSort('dnvAccuracy')}>
+                  DNV Strict Acc. <SortIcon sortKey="dnvAccuracy" currentSortConfig={sortConfig} />
                 </th>
-                
-                <th 
-                  className="px-3 py-3.5 text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 select-none group" 
-                  onClick={() => requestSort('reasoningScore')}
-                >
-                  Reasoning Score <SortIcon sortKey="reasoningScore" currentSortConfig={sortConfig} />
+                <th className="px-3 py-3.5 text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 select-none group" onClick={() => requestSort('baselAccuracy')}>
+                  Basel Strict Acc. <SortIcon sortKey="baselAccuracy" currentSortConfig={sortConfig} />
                 </th>
-                
                 <th className="px-3 py-3.5 text-sm font-semibold text-gray-900">Methodology</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {sortedData.map((row, index) => (
                 <tr key={row.modelName} className="hover:bg-gray-50 transition-colors">
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                    {index + 1}
-                  </td>
+                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">{index + 1}</td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-semibold">{row.modelName}</td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-mono">{row.accuracy.toFixed(1)}%</td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-mono">{row.reasoningScore.toFixed(2)}</td>
+                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-mono">{row.dnvAccuracy.toFixed(1)}%</td>
+                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-mono">
+                    {row.baselAccuracy > 0 ? `${row.baselAccuracy.toFixed(1)}%` : 'N/A'}
+                  </td>
                   <td className="px-3 py-4 text-sm text-gray-500">{row.methodology}</td>
                 </tr>
               ))}
