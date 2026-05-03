@@ -93,6 +93,20 @@ export default function Home() {
         </p>
       </section>
 
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6">Pipeline Overview</h2>
+        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+          {/* Because we set "unoptimized: true" in next.config.ts for GitHub Pages, 
+            we use a standard HTML img tag pointing to the public folder.
+          */}
+          <img 
+            src="/pipeline.png" 
+            alt="RegBench Construction and Release Pipeline" 
+            className="w-full h-auto rounded"
+          />
+        </div>
+      </section>
+
       <section className="mb-12 bg-gray-50 p-6 rounded-lg border border-gray-200">
         <h2 className="text-xl font-semibold mb-4">Dataset Example</h2>
         <div className="text-sm text-gray-800 space-y-3 font-mono">

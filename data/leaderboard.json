@@ -28,11 +28,5 @@
     "dnvAccuracy": 16.6,
     "baselAccuracy": 17.1,
     "methodology": "Practitioner-scope (full_context)"
-  },
-  {
-    "modelName": "Closed-book Baseline",
-    "dnvAccuracy": 0.0,
-    "baselAccuracy": 0.0,
-    "methodology": "Scenario only, no source text"
   }
 ]
