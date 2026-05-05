@@ -78,7 +78,7 @@ export default function Home() {
         <nav className="flex gap-4 justify-center">
           <Link href="/" className="text-blue-600 hover:underline font-medium">Leaderboard</Link>
           <Link href="/submit" className="text-blue-600 hover:underline font-medium">Submit Results</Link>
-          <a href="#" className="text-blue-600 hover:underline font-medium">[PLACEHOLDER: Download Dataset]</a>
+          <a href="https://huggingface.co/datasets/regbench/regbench-release" className="text-blue-600 hover:underline font-medium">Download Dataset</a>
           <a href="#" className="text-blue-600 hover:underline font-medium">[PLACEHOLDER: Read the Paper]</a>
         </nav>
       </header>
